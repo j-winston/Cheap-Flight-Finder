@@ -28,23 +28,6 @@ class DataManager:
 
         return flight_data
 
-    # Print current spreadsheet data for debugging
-    def print_data_debug(self):
-        print(self.spreadsheet_data)
-
-   # ` def add_flight(self):
-   #      city = input("What city would you like to go to? ")
-   #      lowest_price = input("What's the highest price you'll pay? ")
-   #      iata_code = self.find_iata(city)
-   #
-   #      self.update_row()
-   #      # Only update the spreadsheet if a proper airport code was received
-   #      if iata_code:
-   #          add_flight_response = requests.post(url=self.spreadsheet_endpoint,
-   #                                              json=post_body,
-   #                                              headers=self.spreadsheet_header)
-   #          print(add_flight_response.text)`
-
     # Check for empty IATA fields and populate with the proper airport code
     def fill_iata(self):
         row_number = 1
@@ -74,14 +57,15 @@ class DataManager:
             return 400
 
     def update_row(self, index, col_name, value):
-        # Find the column name and also the number of columns it is offset
+        # Find the column name in the spreadsheet and also its offset
         col_offset = 0
         header = self.sheet_1[1]
         for element in header:
+            # When column name is found, exit
             if element == col_name:
                 break
             col_offset += 1
-
+        # Call pygsheet method to update the spreadsheet
         self.sheet_1.update_row(index=index, values=[value], col_offset=col_offset)
         print(self.sheet_1)
 

@@ -38,27 +38,3 @@ class FlightSearch:
             search_results.append(search_result)
         return search_results
 
-    #         # Check if any flights were found, if so, update spreadsheet, and print out links.
-    #         if self.is_flights(search_results):
-    #             city_from = search_results.json()['data'][0]['cityFrom']
-    #             city_to = search_results.json()['data'][0]['cityTo']
-    #             price = search_results.json()['data'][0]['price']
-    #             purchase_link = search_results.json()['data'][0]['deep_link']
-    #             self.data_manager.update_row(index=1, col_name='Purchase Link', value=purchase_link)
-    #             # Update row number
-    #             cur_row += 1
-    #
-    #             print(f"going from {city_from} to {city_to} with a ticket cost of {price}. You can purchase at this"
-    #                   f"link: {purchase_link}")
-    #         else:
-    #             print(f"No flights found to {iata_code} with given constraints.")
-    #
-    # # Verify that flights were actually found
-    # def is_flights(self, flight_search_results):
-    #     if len(flight_search_results.json()['data']) == 0:
-    #         return False
-    #     else:
-    #         return True
-
-
-
