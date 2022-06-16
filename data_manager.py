@@ -1,5 +1,5 @@
 # This class is responsible for talking to the Google Sheet.
-from api_config import SHEETY_USERNAME, SHEETY_AUTH_HEADER, KIWI_API_KEY
+from api_config import KIWI_API_KEY
 import requests
 import pygsheets
 
@@ -69,6 +69,17 @@ class DataManager:
         self.sheet_1.update_row(index=index, values=[value], col_offset=col_offset)
         print(self.sheet_1)
 
+    def add_user(self, first_name, last_name, email):
+        # Get 'users' sheet
+        users_sheet = self.spreadsheet_file.worksheet_by_title('users')
 
+        # Find index of first empty row
+        empty_row_index = len(users_sheet.get_all_records()) + 1
 
+        # Update row with user data
+        users_sheet.insert_rows(empty_row_index, number=1, values=[first_name, last_name, email])
 
+    def get_all_users(self):
+        users_sheet = self.spreadsheet_file.worksheet_by_title('users')
+        users = users_sheet.get_all_records()
+        return users
